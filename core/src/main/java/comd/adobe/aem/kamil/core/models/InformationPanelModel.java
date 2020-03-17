@@ -13,14 +13,16 @@ import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 @Model(adaptables = Resource.class)
 public class InformationPanelModel {
 
     @ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)
-    public String navigationRoot;
+    private String navigationRoot;
 
     @SlingObject
     private Resource currentResource;
@@ -32,50 +34,11 @@ public class InformationPanelModel {
 
     @PostConstruct
     protected void init() {
-        try {
-            Resource resource = currentResource.getResourceResolver().getResource(navigationRoot);
+        Resource resource = currentResource.getResourceResolver().getResource(navigationRoot);
+        if (resource != null) {
             PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
-            if (resource != null) {
-                Iterator<Resource> children = resource.listChildren();
-                // filter only pages
-                List<Resource> resources = new ArrayList<>();
-                children.forEachRemaining(resources::add);
-                List<Resource> resourcePages = resources.stream()
-                        .filter(r -> r.getResourceType().equals("cq:Page"))
-                        .collect(Collectors.toList());
-                // construct TileItem object and add to temp list
-                List<TileItem> tempTileItems = new ArrayList<>();
-                for (Resource currentResource : resourcePages) {
-                    TileItem tileItem = new TileItem();
-                    assert pageManager != null;
-                    Page currentPage = pageManager.getPage(currentResource.getPath());
-                    Image image = new Image(currentPage.getContentResource("image"));
-                    tileItem.setThumbnailSource(image.getPath() + "/file");
-                    tileItem.setPageDescription(currentPage.getDescription());
-                    tileItem.setPageTitle(currentPage.getTitle());
-                    tempTileItems.add(tileItem);
-                }
-                // sort pages if list size exceed 4
-                if (tempTileItems.size() > 4) {
-                    Random random = new Random();
-                    List<TileItem> randomized4Tiles = new ArrayList<>();
-                    int numberOfElements = 4;
-                    for (int i = 0; i < numberOfElements; i++) {
-                        int randomIndex = random.nextInt(tempTileItems.size());
-                        TileItem randomElement = tempTileItems.get(randomIndex);
-                        randomized4Tiles.add(randomElement);
-                        tempTileItems.remove(randomElement);
-                    }
-                    tileItems = randomized4Tiles;
-                } else {
-                    tileItems = tempTileItems;
-                }
-            }
-        } catch (Exception e) {
-            // test exception printer
-            e.printStackTrace();
+            tileItems = generateTileItemsFromParentPage(resource, pageManager);
         }
-
     }
 
     public List<TileItem> getTileItems() {
@@ -86,4 +49,43 @@ public class InformationPanelModel {
         return StringUtils.isBlank(this.navigationRoot);
     }
 
+    private List<TileItem> generateTileItemsFromParentPage(Resource resource, PageManager pageManager) {
+        List<TileItem> tempTileItems = new ArrayList<>();
+        Iterator<Resource> children = resource.listChildren();
+        List<Resource> resources = new ArrayList<>();
+        children.forEachRemaining(resources::add);
+        resources.stream()
+                .filter(r -> r.getResourceType().equals("cq:Page"))
+                .forEach(r -> {
+                    assert pageManager != null;
+                    populateTempTileItemList(tempTileItems, r, pageManager);
+                });
+        return randomizeTiles(tempTileItems);
+    }
+
+    private void populateTempTileItemList(List<TileItem> tempTileItems, Resource currentResource, PageManager pageManager) {
+        TileItem tileItem = new TileItem();
+        Page currentPage = pageManager.getPage(currentResource.getPath());
+        tileItem.setThumbnailSource(new Image(currentPage.getContentResource("image")).getPath() + "/file");
+        tileItem.setPageDescription(currentPage.getDescription());
+        tileItem.setPageTitle(currentPage.getTitle());
+        tempTileItems.add(tileItem);
+    }
+
+    private List<TileItem> randomizeTiles(List<TileItem> tempTileItems) {
+        if (tempTileItems.size() > 4) {
+            Random random = new Random();
+            List<TileItem> randomized4Tiles = new ArrayList<>();
+            int numberOfElements = 4;
+            for (int i = 0; i < numberOfElements; i++) {
+                int randomIndex = random.nextInt(tempTileItems.size());
+                TileItem randomElement = tempTileItems.get(randomIndex);
+                randomized4Tiles.add(randomElement);
+                tempTileItems.remove(randomElement);
+            }
+            return randomized4Tiles;
+        } else {
+            return tempTileItems;
+        }
+    }
 }
