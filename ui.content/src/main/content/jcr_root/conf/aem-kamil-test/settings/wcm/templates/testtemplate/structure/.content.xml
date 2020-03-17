@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:deviceGroups="[/etc/mobile/groups/responsive]"
+        cq:lastModified="{Date}2020-03-17T14:21:43.112+01:00"
+        cq:lastModifiedBy="admin"
+        cq:template="/conf/aem-kamil-test/settings/wcm/templates/testtemplate"
+        jcr:primaryType="cq:PageContent"
+        sling:resourceType="aem-kamil-test/components/structure/page">
+        <root
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/foundation/components/responsivegrid">
+            <informationpanel
+                jcr:created="{Date}2020-03-17T14:21:33.590+01:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2020-03-17T14:21:43.109+01:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="aem-kamil-test/components/content/informationpanel"
+                navigationRoot="/content/aem-kamil-test/fr"/>
+            <scrapper
+                jcr:created="{Date}2020-03-17T14:21:23.298+01:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2020-03-17T14:21:23.298+01:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="aem-kamil-test/components/content/scrapper"/>
+        </root>
+        <cq:responsive jcr:primaryType="nt:unstructured">
+            <breakpoints jcr:primaryType="nt:unstructured">
+                <phone
+                    jcr:primaryType="nt:unstructured"
+                    title="Smaller Screen"
+                    width="{Long}650"/>
+                <tablet
+                    jcr:primaryType="nt:unstructured"
+                    title="Tablet"
+                    width="{Long}1200"/>
+            </breakpoints>
+        </cq:responsive>
+    </jcr:content>
+</jcr:root>
