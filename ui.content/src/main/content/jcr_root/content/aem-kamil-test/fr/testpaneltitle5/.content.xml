@@ -2,11 +2,13 @@
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
     jcr:primaryType="cq:Page">
     <jcr:content
+        cq:lastModified="{Date}2020-03-17T10:58:46.025+01:00"
+        cq:lastModifiedBy="admin"
         cq:template="/conf/aem-kamil-test/settings/wcm/templates/content-page"
+        jcr:description="Testowy opis dla panelu 5"
         jcr:primaryType="cq:PageContent"
-        jcr:title="Français"
-        sling:resourceType="aem-kamil-test/components/structure/page"
-        pageTitle="Nouveau Project">
+        jcr:title="TestPanelTitle5"
+        sling:resourceType="aem-kamil-test/components/structure/page">
         <root
             jcr:primaryType="nt:unstructured"
             sling:resourceType="wcm/foundation/components/responsivegrid">
@@ -14,11 +16,8 @@
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="wcm/foundation/components/responsivegrid"/>
         </root>
-        <image/>
+        <image jcr:primaryType="nt:unstructured">
+            <file/>
+        </image>
     </jcr:content>
-    <testpanelinfo1/>
-    <testpanelinfo10/>
-    <testpanelinfo3/>
-    <testpanelinfo4/>
-    <testpaneltitle5/>
 </jcr:root>
