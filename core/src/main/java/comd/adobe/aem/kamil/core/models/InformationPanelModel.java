@@ -31,6 +31,7 @@ public class InformationPanelModel {
     private ResourceResolver resourceResolver;
 
     private List<TileItem> tileItems;
+    private final int numberOfTiles = 4;
 
     @PostConstruct
     protected void init() {
@@ -73,11 +74,10 @@ public class InformationPanelModel {
     }
 
     private List<TileItem> randomizeTiles(List<TileItem> tempTileItems) {
-        if (tempTileItems.size() > 4) {
+        if (tempTileItems.size() > numberOfTiles) {
             Random random = new Random();
             List<TileItem> randomized4Tiles = new ArrayList<>();
-            int numberOfElements = 4;
-            for (int i = 0; i < numberOfElements; i++) {
+            for (int i = 0; i < numberOfTiles; i++) {
                 int randomIndex = random.nextInt(tempTileItems.size());
                 TileItem randomElement = tempTileItems.get(randomIndex);
                 randomized4Tiles.add(randomElement);
