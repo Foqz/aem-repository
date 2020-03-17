@@ -16,11 +16,6 @@
                             sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
                             fieldLabel="tableName"
                             name="./tableName"/>
-<!--                    <numberOfRows-->
-<!--                            jcr:primaryType="nt:unstructured"-->
-<!--                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"-->
-<!--                            fieldLabel="numberOfRows"-->
-<!--                            name="./numberOfRows"/>-->
                 </items>
             </column>
         </items>

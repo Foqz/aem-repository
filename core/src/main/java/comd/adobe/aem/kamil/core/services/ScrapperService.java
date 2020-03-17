@@ -1,7 +1,6 @@
 package comd.adobe.aem.kamil.core.services;
 
 import comd.adobe.aem.kamil.core.etc.ScrapperItem;
-import comd.adobe.aem.kamil.core.models.Scrapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,7 +9,6 @@ import org.jsoup.select.Elements;
 import org.osgi.service.component.annotations.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -27,32 +25,6 @@ public class ScrapperService {
     private final String calMaxiClass = "calMaxi";
     private final String calMiniClass = "calMini";
     private final String colAktualizacjaClass = "colAktualizacja";
-
-    public String[] getColumn(String desiredURL, String columnClass) {
-        String[] resultArray = null;
-        String[] currentColumnArray = null;
-        try {
-            Document doc = Jsoup.connect(desiredURL).get();
-            Elements elements = doc.getElementsByClass("sortTable");
-            for (Element element : elements) {
-                String currentColumn = element.getElementsByClass(columnClass).text();
-                currentColumnArray = currentColumn.split(" ");
-
-                if (columnClass.equals("colZmianaProcentowa") || columnClass.equals("colLiczbaTransakcji")) {
-                    resultArray = Arrays.copyOfRange(currentColumnArray, 3, currentColumnArray.length);
-                } else {
-                    resultArray = Arrays.copyOfRange(currentColumnArray, 2, currentColumnArray.length);
-                }
-                if (columnClass.equals("colAktualizacja")) {
-                    System.out.println("test");
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            ;
-        }
-        return resultArray;
-    }
 
     public List<ScrapperItem> getScrapperItemList(String desiredURL) {
         List<ScrapperItem> resultList = new ArrayList<>();
@@ -76,13 +48,14 @@ public class ScrapperService {
                         scrapperItem.setMax(((Element) current).getElementsByClass(calMaxiClass).text());
                         scrapperItem.setMin(((Element) current).getElementsByClass(calMiniClass).text());
                         scrapperItem.setTime(((Element) current).getElementsByClass(colAktualizacjaClass).text());
-                        if (scrapperItem != null && !scrapperItem.getValue().equals("")) {
+                        if (!scrapperItem.getValue().equals("")) {
                             resultList.add(scrapperItem);
                         }
                     }
                 }
             }
         } catch (Exception e) {
+            // test exception printer
             e.printStackTrace();
         }
         return resultList;

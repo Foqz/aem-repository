@@ -1,6 +1,5 @@
 package comd.adobe.aem.kamil.core.etc;
 
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -3,19 +3,16 @@
 <div data-sly-use.template="core/wcm/components/commons/v1/templates.html"
      data-sly-use.informationpanel="comd.adobe.aem.kamil.core.models.InformationPanelModel"
      class="container">
-
     <div class="row" data-sly-list.element="${informationpanel.tileItems}">
         <div class="column">
-            <img src="${element.thumbnailSource}">
+            <img src="${element.thumbnailSource}" alt="Empty">
             <p><b>${element.pageTitle}</b></p>
             <p>${element.pageDescription}</p>
         </div>
-
     </div>
 </div>
 <div class="container">
 </div>
-
 <sly data-sly-call="${template.placeholder @ isEmpty=informationpanel.empty}"></sly>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

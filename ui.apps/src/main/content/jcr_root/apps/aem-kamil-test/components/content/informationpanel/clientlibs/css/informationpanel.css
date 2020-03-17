@@ -13,10 +13,6 @@
     background-size: cover;
 }
 
-/*.column img:hover {*/
-/*    opacity: 1;*/
-/*}*/
-
 .row:after {
     content: "";
     display: table;

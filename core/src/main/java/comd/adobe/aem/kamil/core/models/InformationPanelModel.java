@@ -24,11 +24,11 @@ public class InformationPanelModel {
 
     @SlingObject
     private Resource currentResource;
+
     @SlingObject
     private ResourceResolver resourceResolver;
 
     private List<TileItem> tileItems;
-
 
     @PostConstruct
     protected void init() {
@@ -37,12 +37,13 @@ public class InformationPanelModel {
             PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
             if (resource != null) {
                 Iterator<Resource> children = resource.listChildren();
+                // filter only pages
                 List<Resource> resources = new ArrayList<>();
                 children.forEachRemaining(resources::add);
                 List<Resource> resourcePages = resources.stream()
                         .filter(r -> r.getResourceType().equals("cq:Page"))
                         .collect(Collectors.toList());
-
+                // construct TileItem object and add to temp list
                 List<TileItem> tempTileItems = new ArrayList<>();
                 for (Resource currentResource : resourcePages) {
                     TileItem tileItem = new TileItem();
@@ -54,11 +55,12 @@ public class InformationPanelModel {
                     tileItem.setPageTitle(currentPage.getTitle());
                     tempTileItems.add(tileItem);
                 }
-                if (tempTileItems.size() > 4){
+                // sort pages if list size exceed 4
+                if (tempTileItems.size() > 4) {
                     Random random = new Random();
                     List<TileItem> randomized4Tiles = new ArrayList<>();
                     int numberOfElements = 4;
-                    for (int i = 0; i < numberOfElements; i++){
+                    for (int i = 0; i < numberOfElements; i++) {
                         int randomIndex = random.nextInt(tempTileItems.size());
                         TileItem randomElement = tempTileItems.get(randomIndex);
                         randomized4Tiles.add(randomElement);
@@ -70,8 +72,8 @@ public class InformationPanelModel {
                 }
             }
         } catch (Exception e) {
-            //testowy exception printer
-            System.out.println(Arrays.toString(e.getStackTrace()));
+            // test exception printer
+            e.printStackTrace();
         }
 
     }
