@@ -1,0 +1,24 @@
+.column {
+    float: left;
+    width: 25%;
+    padding: 10px;
+}
+
+.column img {
+    opacity: 0.8;
+    cursor: pointer;
+    float:  left;
+    width:  100px;
+    height: 100px;
+    background-size: cover;
+}
+
+/*.column img:hover {*/
+/*    opacity: 1;*/
+/*}*/
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
