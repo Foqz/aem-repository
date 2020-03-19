@@ -11,4 +11,5 @@ public class TileItem {
     private String thumbnailSource;
     private String pageDescription;
     private String pageTitle;
+    private String pageUrl;
 }

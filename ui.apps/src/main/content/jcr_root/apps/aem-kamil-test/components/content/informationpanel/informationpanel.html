@@ -1,13 +1,13 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <div data-sly-use.template="core/wcm/components/commons/v1/templates.html"
      data-sly-use.informationpanel="comd.adobe.aem.kamil.core.models.InformationPanelModel"
      class="container">
     <div class="row" data-sly-list.element="${informationpanel.tileItems}">
         <div class="column">
-            <img src="${element.thumbnailSource}">
-            <p><b>${element.pageTitle}</b></p>
-            <p>${element.pageDescription}</p>
+            <img src="${element.thumbnailSource}" alt="${element.pageUrl}" onclick="buildUrl(this)">
+            <kbd>NEWS!</kbd>
+            <p><b>${element.pageTitle}</b><br>
+                ${element.pageDescription}
+            </p>
         </div>
     </div>
 </div>

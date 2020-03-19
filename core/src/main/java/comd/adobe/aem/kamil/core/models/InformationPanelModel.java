@@ -70,6 +70,7 @@ public class InformationPanelModel {
         tileItem.setThumbnailSource(new Image(currentPage.getContentResource("image")).getPath() + "/file");
         tileItem.setPageDescription(currentPage.getDescription());
         tileItem.setPageTitle(currentPage.getTitle());
+        tileItem.setPageUrl("localhost:4502" + currentPage.getPath() + ".html");
         tempTileItems.add(tileItem);
     }
 
