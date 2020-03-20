@@ -1,0 +1,17 @@
+<div data-sly-use.template="core/wcm/components/commons/v1/templates.html"
+     data-sly-use.tabComponentModel="comd.adobe.aem.kamil.core.models.TabComponentModel"
+     class="container">
+    <div>
+        <p>${tabComponentModel.tabContainerTitle}</p>
+    </div>
+    <div class="row" data-sly-list.element="${tabComponentModel.tabDetailsList}">
+        <div class="column">
+            <p>
+                ${element.tabId}
+                ${element.tabTitle}
+                ${element.tabDescription}
+            </p>
+        </div>
+    </div>
+</div>
+<sly data-sly-call="${template.placeholder @ isEmpty=tabComponentModel.empty}"></sly>
