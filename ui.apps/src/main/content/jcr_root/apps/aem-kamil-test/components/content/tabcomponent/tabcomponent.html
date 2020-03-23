@@ -3,7 +3,7 @@
      class="container">
     <h2>${tabComponentModel.tabContainerTitle}</h2>
     <br>
-    <ul class="nav nav-pills" role="tablist" data-sly-list.tabDetails="${tabComponentModel.tabDetailsList}">
+    <ul class="nav nav-pills" role="tablist" data-sly-list.tabDetails="${tabComponentModel.tabDetails}">
         <li class="nav-item">
             <a class="${tabDetailsList.first ? 'nav-link active' : 'nav-link'}" data-toggle="pill"
                href="#${tabDetails.tabId}">
@@ -11,7 +11,7 @@
             </a>
         </li>
     </ul>
-    <div class="tab-content" data-sly-list.tabDetails2="${tabComponentModel.tabDetailsList}">
+    <div class="tab-content" data-sly-list.tabDetails2="${tabComponentModel.tabDetails}">
         <div id="${tabDetails2.tabId}"
              class="${tabDetails2List.first ? 'container tab-pane active': 'container tab-pane fade'}">
             <h3>${tabDetails2.tabDescription}</h3>
