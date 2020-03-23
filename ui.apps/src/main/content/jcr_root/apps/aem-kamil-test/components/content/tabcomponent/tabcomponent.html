@@ -1,16 +1,21 @@
 <div data-sly-use.template="core/wcm/components/commons/v1/templates.html"
      data-sly-use.tabComponentModel="comd.adobe.aem.kamil.core.models.TabComponentModel"
      class="container">
-    <div>
-        <p>${tabComponentModel.tabContainerTitle}</p>
-    </div>
-    <div class="row" data-sly-list.element="${tabComponentModel.tabDetailsList}">
-        <div class="column">
-            <p>
-                ${element.tabId}
-                ${element.tabTitle}
-                ${element.tabDescription}
-            </p>
+    <h2>${tabComponentModel.tabContainerTitle}</h2>
+    <br>
+    <ul class="nav nav-pills" role="tablist" data-sly-list.tabDetails="${tabComponentModel.tabDetailsList}">
+        <li class="nav-item">
+            <a class="${tabDetailsList.first ? 'nav-link active' : 'nav-link'}" data-toggle="pill"
+               href="#${tabDetails.tabId}">
+                ${tabDetails.tabTitle}
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content" data-sly-list.tabDetails2="${tabComponentModel.tabDetailsList}">
+        <div id="${tabDetails2.tabId}"
+             class="${tabDetails2List.first ? 'container tab-pane active': 'container tab-pane fade'}">
+            <h3>${tabDetails2.tabDescription}</h3>
+            <div data-sly-resource="${tabDetails2List.index @resourceType = 'wcm/foundation/components/parsys'}"></div>
         </div>
     </div>
 </div>
