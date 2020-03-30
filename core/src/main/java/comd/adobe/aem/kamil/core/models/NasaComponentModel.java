@@ -75,16 +75,23 @@ public class NasaComponentModel {
         NasaRandomAnomaly tempNasaRandomAnomaly = new NasaRandomAnomaly();
         try {
             JSONObject jsonObject = new JSONObject(response);
-            tempNasaRandomAnomaly.setTitle(jsonObject.getString("title"));
-            tempNasaRandomAnomaly.setUrl(jsonObject.getString("url"));
-            tempNasaRandomAnomaly.setCopyright(jsonObject.getString("copyright"));
-            tempNasaRandomAnomaly.setDate(jsonObject.getString("date"));
-            tempNasaRandomAnomaly.setExplanation(jsonObject.getString("explanation"));
-            tempNasaRandomAnomaly.setHdurl(jsonObject.getString("hdurl"));
+            tempNasaRandomAnomaly.setTitle(getJsonProperties(jsonObject, "title"));
+            tempNasaRandomAnomaly.setUrl(getJsonProperties(jsonObject, "url"));
+            tempNasaRandomAnomaly.setCopyright(getJsonProperties(jsonObject, "copyright").equals("") ? "" : "Copyright by " + getJsonProperties(jsonObject, "copyright"));
+            tempNasaRandomAnomaly.setDate(getJsonProperties(jsonObject, "date"));
+            tempNasaRandomAnomaly.setExplanation(getJsonProperties(jsonObject, "explanation"));
+            tempNasaRandomAnomaly.setHdurl(getJsonProperties(jsonObject, "hdurl"));
         } catch (JSONException e) {
             logger.error(e.getMessage());
         }
         return tempNasaRandomAnomaly;
+    }
+
+    private String getJsonProperties(JSONObject jsonObject, String key) throws JSONException {
+        if (jsonObject.has(key)) {
+            return jsonObject.getString(key);
+        }
+        return "";
     }
 
     public NasaRandomAnomaly getNasaRandomAnomaly() {
