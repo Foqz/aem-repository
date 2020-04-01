@@ -17,6 +17,18 @@
                             sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
                             fieldLabel="Component title (optional)"
                             name="./componentTitle"/>
+                    <factCategory
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                            name="./factCategory"
+                            text="Choose fact category (button visibility)"
+                            value="true"/>
+                    <factTextSearch
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                            name="./factTextSearch"
+                            text="Search in facts by text (button visibility)"
+                            value="true"/>
                 </items>
             </column>
         </items>

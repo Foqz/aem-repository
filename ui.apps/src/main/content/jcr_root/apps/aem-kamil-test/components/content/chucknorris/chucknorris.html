@@ -1,6 +1,35 @@
-<div data-sly-use.template="core/wcm/components/commons/v1/templates.html"
-     data-sly-use.chuck="comd.adobe.aem.kamil.core.models.ChuckNorrisModel"
-     class="container">
+<div data-sly-use.chuck="comd.adobe.aem.kamil.core.models.ChuckNorrisModel"
+     class="container chuck_container">
+    <div class="row align-items-center">
+        <div class="col-4 mx-auto" id="chuck_form_column">
+            <form>
+                <div class="form-group">
+                    <input id="inlineCheckbox1" class="form-check-input" type="checkbox" data-toggle="toggle"
+                           data-style="mr-1" checked>
+                    <label for="inlineCheckbox1" class="form-check-label">Random fact generation</label><br>
 
+                    <label for="inputAddress">Input text to search the fact</label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="Search fact with text">
+
+                    <label for="inputState">State</label>
+                    <select id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success float-left">Generate !</button>
+            </form>
+        </div>
+        <div class="col-4 mx-auto">
+            <img src="https://api.chucknorris.io/img/chucknorris_logo_coloured_small@2x.png" alt="logo" id="chuck_logo"
+                 class="img-fluid mx-auto d-block">
+        </div>
+        <div class="col-4 mx-auto">
+            <div class="jumbotron mx-auto" id="chuck_jumbotron">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="https://www.google.com/" class="btn btn-primary float-right">Go somewhere</a>
+            </div>
+        </div>
+    </div>
 </div>
-<sly data-sly-call="${template.placeholder @ isEmpty=chuck.empty}"></sly>

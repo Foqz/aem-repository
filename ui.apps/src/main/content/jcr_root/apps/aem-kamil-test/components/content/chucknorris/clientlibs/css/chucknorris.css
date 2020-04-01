@@ -1,0 +1,13 @@
+.chuck_container {
+    border: 1px solid #000000
+}
+#chuck_logo {
+    max-height: 180px;
+    max-width: 280px;
+}
+#chuck_jumbotron {
+    padding: 20px; !important;
+}
+#chuck_form_column {
+    padding: 20px; !important;
+}
