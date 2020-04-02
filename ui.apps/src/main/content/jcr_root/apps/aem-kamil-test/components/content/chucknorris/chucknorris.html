@@ -2,22 +2,25 @@
      class="container chuck_container">
     <div class="row align-items-center">
         <div class="col-4 mx-auto" id="chuck_form_column">
-            <form>
+            <form id ="form_id">
                 <div class="form-group">
-                    <input id="inlineCheckbox1" class="form-check-input" type="checkbox" data-toggle="toggle"
-                           data-style="mr-1" checked>
-                    <label for="inlineCheckbox1" class="form-check-label">Random fact generation</label><br>
-
-                    <label for="inputAddress">Input text to search the fact</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="Search fact with text">
-
-                    <label for="inputState">State</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
+                    <div>
+                        <input id="randomFactCheckbox" class="form-check-input" type="checkbox" data-toggle="toggle"
+                               data-style="mr-1" checked>
+                        <label for="randomFactCheckbox" class="form-check-label">Random fact generation</label><br>
+                    </div>
+                    <div data-sly-test="${chuck.factTextSearch}">
+                        <label for="factTextInput">Input text to search the fact</label>
+                        <input type="text" class="form-control" id="factTextInput" placeholder="Search fact with text">
+                    </div>
+                    <div data-sly-test="${chuck.factCategory}">
+                        <label for="factCategory">Fact Category</label>
+                        <select id="factCategory" class="form-control" data-sly-list.element="${chuck.factCategories}">
+                            <option>${element}</option>
+                        </select>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-success float-left">Generate !</button>
+                <button type="button" class="btn btn-success float-left" onclick="handleChuckServlet()">Generate !</button>
             </form>
         </div>
         <div class="col-4 mx-auto">
@@ -26,9 +29,9 @@
         </div>
         <div class="col-4 mx-auto">
             <div class="jumbotron mx-auto" id="chuck_jumbotron">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="https://www.google.com/" class="btn btn-primary float-right">Go somewhere</a>
+                <h5 class="card-title" id="factCardTitle">Click Generate to START!</h5>
+                <p class="card-text" id="factValue">...</p>
+                <a href="https://www.google.com/" class="btn btn-primary float-right disabled" id="factUrl">Go to fact's website!</a>
             </div>
         </div>
     </div>
