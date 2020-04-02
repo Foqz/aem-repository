@@ -21,11 +21,13 @@
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
                             name="./isFactCategory"
+                            checked="false"
                             text="Choose fact category (button visibility)"
                             value="true"/>
                     <isFactTextSearch
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/coral/foundation/form/checkbox"
+                            checked="false"
                             name="./isFactTextSearch"
                             text="Search in facts by text (button visibility)"
                             value="true"/>

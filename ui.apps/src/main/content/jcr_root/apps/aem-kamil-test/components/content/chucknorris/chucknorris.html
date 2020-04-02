@@ -1,8 +1,9 @@
 <div data-sly-use.chuck="comd.adobe.aem.kamil.core.models.ChuckNorrisModel"
      class="container chuck_container">
+    <h2>${chuck.componentTitle}</h2>
     <div class="row align-items-center">
         <div class="col-4 mx-auto" id="chuck_form_column">
-            <form id ="form_id">
+            <form id="form_id">
                 <div class="form-group">
                     <div>
                         <input id="randomFactCheckbox" class="form-check-input" type="checkbox" data-toggle="toggle"
@@ -10,7 +11,7 @@
                         <label for="randomFactCheckbox" class="form-check-label">Random fact generation</label><br>
                     </div>
                     <div data-sly-test="${chuck.factTextSearch}">
-                        <label for="factTextInput">Input text to search the fact</label>
+                        <label for="factTextInput">Type text to search CHUCK jokes !</label>
                         <input type="text" class="form-control" id="factTextInput" placeholder="Search fact with text">
                     </div>
                     <div data-sly-test="${chuck.factCategory}">
@@ -20,7 +21,9 @@
                         </select>
                     </div>
                 </div>
-                <button type="button" class="btn btn-success float-left" onclick="handleChuckServlet()">Generate !</button>
+                <button type="button" class="btn btn-success float-left" id="generateButton"
+                        onclick="handleChuckServlet()">Generate !
+                </button>
             </form>
         </div>
         <div class="col-4 mx-auto">
@@ -31,7 +34,8 @@
             <div class="jumbotron mx-auto" id="chuck_jumbotron">
                 <h5 class="card-title" id="factCardTitle">Click Generate to START!</h5>
                 <p class="card-text" id="factValue">...</p>
-                <a href="https://www.google.com/" class="btn btn-primary float-right disabled" id="factUrl">Go to fact's website!</a>
+                <a href="https://www.google.com/" class="btn btn-primary float-right disabled" id="factUrl">Go to fact's
+                    website!</a>
             </div>
         </div>
     </div>

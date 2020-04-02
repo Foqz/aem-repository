@@ -27,7 +27,6 @@ public class ChuckNorrisModel {
 
     private List<String> factCategories = new ArrayList<>();
 
-
     @ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)
     private String componentTitle;
     @ValueMapValue(injectionStrategy = InjectionStrategy.OPTIONAL)
@@ -43,8 +42,20 @@ public class ChuckNorrisModel {
 
     private List<String> getCategoriesFromAPI() {
         StringBuilder response = new StringBuilder();
+        response = getResponseFromURL(response, factCategoriesURL);
+        if (!("").equals(response.toString())) {
+            String[] valuesInQuotes = StringUtils.substringsBetween(response.toString(), "\"", "\"");
+            if (valuesInQuotes.length > 0) {
+                factCategories.add(emptyCategoryString);
+                factCategories.addAll(Arrays.asList(valuesInQuotes));
+            }
+        }
+        return factCategories;
+    }
+
+    public StringBuilder getResponseFromURL(StringBuilder response, String URL) {
         try {
-            HttpURLConnection httpClient = (HttpURLConnection) new URL(factCategoriesURL).openConnection();
+            HttpURLConnection httpClient = (HttpURLConnection) new URL(URL).openConnection();
             httpClient.setRequestMethod("GET");
             httpClient.setRequestProperty("User-Agent", "Mozilla/5.0");
             BufferedReader in = new BufferedReader(new InputStreamReader(httpClient.getInputStream()));
@@ -55,14 +66,7 @@ public class ChuckNorrisModel {
         } catch (IOException e) {
             logger.error(e.getMessage());
         }
-        if (!("").equals(response.toString())) {
-            String[] valuesInQuotes = StringUtils.substringsBetween(response.toString(), "\"", "\"");
-            if (valuesInQuotes.length > 0) {
-                factCategories.add(emptyCategoryString);
-                factCategories.addAll(Arrays.asList(valuesInQuotes));
-            }
-        }
-        return factCategories;
+        return response;
     }
 
     public boolean isEmpty() {
