@@ -43,7 +43,7 @@ public class ChuckNorrisModel {
     private List<String> getCategoriesFromAPI() {
         StringBuilder response = new StringBuilder();
         response = getResponseFromURL(response, factCategoriesURL);
-        if (!("").equals(response.toString())) {
+        if (!StringUtils.equals("", response.toString())) {
             String[] valuesInQuotes = StringUtils.substringsBetween(response.toString(), "\"", "\"");
             if (valuesInQuotes.length > 0) {
                 factCategories.add(emptyCategoryString);
